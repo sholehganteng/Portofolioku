@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio profesional M. Sholeh - Web Developer & UI/UX Designer">
+    <meta name="keywords" content="portfolio, web developer, UI/UX, design, programming">
+    <meta name="author" content="M. Sholeh">
+    <title>Portfolio | M. Sholeh</title>
+    <link href="dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <style>
+        /* Base Styles */
+        .img-project {
+            transition: transform 0.3s ease;
+        }
+
+        .img-project:hover {
+            transform: scale(1.1);
+        }
+
+        .img-sertif {
+            transition: transform 0.3s ease;
+        }
+
+        .img-sertif:hover {
+            transform: scale(1.1);
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Modern 2030 Styles */
+        .gradient-text {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 8s infinite linear;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .animated-border {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6, #06b6d4);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: border-animation 8s linear infinite;
+            border-radius: 0.5rem;
+        }
+
+        @keyframes border-animation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        .hover-3d {
+            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .hover-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            z-index: 10000;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scroll-indicator"></div>
+
+    <!-- Header Start -->
+    <header class="absolute top-0 left-0 z-10 flex items-center w-full bg-transparent">
+        <div class="container">
+            <div class="relative flex items-center justify-between">
+                <div class="px-4">
+                    <a href="#home" class="block py-6 text-lg font-bold gradient-text">M. SHOLEH</a>
+                </div>
+                <div class="flex items-center px-4">
+                    <button id="hamburger" name="hamburger" type="button" class="absolute block right-4 lg:hidden">
+                        <span class="transition duration-300 ease-in-out origin-top-left hamburger-line"></span>
+                        <span class="transition duration-300 ease-in-out hamburger-line"></span>
+                        <span class="transition duration-300 ease-in-out origin-bottom-left hamburger-line"></span>
+                    </button>
+                    <nav id="nav-menu"
+                        class="hidden absolute py-5 glass-effect rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none dark:bg-dark dark:shadow-slate-500 lg:dark:bg-transparent">
+                        <ul class="block lg:flex">
+                            <li class="group">
+                                <a href="#home"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">Home page</a>
+                            </li>
+                            <li class="group">
+                                <a href="#about"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">About
+                                    me</a>
+                            </li>
+                            <li class="group">
+                                <a href="#skills"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">Skills</a>
+                            </li>
+                            <li class="group">
+                                <a href="#portfolio"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">Portfolio</a>
+                            </li>
+                            <li class="group">
+                                <a href="#sertifikat"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">Certificate</a>
+                            </li>
+                            <li class="group">
+                                <a href="#contact"
+                                    class="flex py-2 mx-8 text-base text-dark group-hover:text-primary dark:text-white">Contact
+                                    me</a>
+                            </li>
+                            <li class="flex items-center pl-8 mt-3 lg:mt-0">
+                                <div class="flex">
+                                    <span class="mr-2 text-sm text-slate-500">light</span>
+                                    <input type="checkbox" class="hidden" id="dark-toggle">
+                                    <label for="dark-toggle">
+                                        <div
+                                            class="flex items-center h-5 p-1 rounded-full cursor-pointer w-9 bg-slate-500">
+                                            <div
+                                                class="w-4 h-4 transition duration-300 ease-in-out bg-white rounded-full toggle-circle">
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <span class="ml-2 text-sm text-slate-500">dark</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Section Start -->
+    <section id="home" class="pt-36 dark:bg-dark">
+        <div class="container">
+            <div class="flex flex-wrap">
+                <div class="self-center w-full px-4 lg:w-1/2">
+                    <h1 class="text-base font-semibold text-primary md:text-xl">Halo semua 👋, saya <span
+                            class="block mt-1 text-4xl font-bold gradient-text lg:text-5xl">M. SHOLEH</span></h1>
+                    <h2 class="mt-3 mb-5 text-lg font-medium text-secondary lg:text-2xl"> Fullstack Developer | <span
+                            class="text-dark dark:text-white">Universitas Kahuripan Kediri </span></h2>
+                    <p class="mb-10 italic font-medium leading-relaxed text-secondary">"Tidak ada jalan pintas untuk sukses. Jika kamu mencari yang mudah, bersiaplah dapat yang biasa-biasa saja." <span
+                            class="font-bold text-dark dark:text-white">- ai</span></p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://wa.me/6281212167410?text=Halo%2C%20saya%20tertarik%20dengan%20website%20Anda.%20Bisakah%20kita%20berdiskusi%20lebih%20lanjut%3F" target="_blank"
+                            class="px-8 py-3 text-base font-semibold text-white transition duration-300 ease-in-out rounded-full bg-gradient-to-r from-primary to-blue-500 hover:shadow-lg hover:shadow-primary/50 hover:scale-105">
+                            <i class="fab fa-whatsapp mr-2"></i> Hubungi saya
+                        </a>
+                        <a href="#portfolio"
+                            class="px-8 py-3 text-base font-semibold transition duration-300 ease-in-out border rounded-full text-primary border-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/50 hover:scale-105">
+                            <i class="fas fa-briefcase mr-2"></i> Portfolio
+                        </a>
+                    </div>
+
+                    <div class="flex items-center mt-8">
+                        <a href="https://github.com/sholehganteng" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/m-sholeh-654152353/?trk=public-profile-join-page" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@kuykuykuy524?_t=ZS-8yG02MWekSK&_r=1" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="self-end w-full px-4 lg:w-1/2">
+                    <div class="mt-10 lg:mt-9 lg:right-0">
+                        <img src="dist/img/foto-removebg-preview.png" alt="M. Sholeh"
+                            class="max-w-full mx-auto rounded-full animate-float">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About Start -->
+    <section id="about" class="pb-32 pt-36 dark:bg-dark">
+        <div class="container">
+            <div class="flex flex-wrap">
+                <div class="w-full px-4 mb-10 lg:w-1/2" data-aos="fade-right" data-aos-duration="1000">
+                    <h4 class="mb-3 text-lg font-bold uppercase text-primary">Tentang saya</h4>
+                    <h2 class="max-w-md mb-5 text-3xl font-bold gradient-text lg:text-4xl">
+                        M. SHOLEH
+                    </h2>
+                    <p class="max-w-xl text-base font-medium text-justify text-secondary">Saya merupakan mahasiswa semester empat pada Program Studi Teknik Informatika di 
+                    Universitas Kahuripan Kediri. Saya memiliki minat yang kuat dalam bidang pengembangan web fullstack, dan secara konsisten mengembangkan kompetensi
+                    di bidang ini melalui pemahaman mendalam terhadap berbagai teknologi serta bahasa pemrograman, baik di sisi front-end maupun back-end. 
+                    Dengan semangat belajar yang tinggi dan kemampuan beradaptasi terhadap perkembangan teknologi terkini, saya berkomitmen untuk terus mengasah 
+                    keterampilan, memperluas pengalaman praktis, serta memberikan kontribusi positif dalam lingkungan kerja yang profesional, dinamis, dan inovatif.
+                    </p>
+                </div>
+                <div class="w-full px-4 lg:w-1/2" data-aos="fade-left" data-aos-duration="1000">
+                    <h3 class="mb-4 text-2xl font-bold gradient-text lg:text-3xl lg:pt-10 text-justify1">Mari berteman
+                    </h3>
+                    <p class="mb-6 text-base font-medium text-justify text-secondary lg:text-lg">Jika Anda ingin terhubung dengan saya di media sosial,
+                        jangan sungkan untuk menyapa melalui platform favorit Anda! Saya senang berbagi ide,
+                        berdiskusi, dan mendengar berbagai pandangan baru. Baik itu pertanyaan, masukan, maupun 
+                        sekadar obrolan ringan, saya selalu terbuka untuk berinteraksi. Yuk, mulai percakapan 
+                        dan mari berbagi pengalaman bersama! </p>
+                    <div class="flex items-center">
+                        <!-- youtube -->
+                        <a href="https://www.youtube.com/@M.Sholeh-x6x" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+
+                        <!-- instagram -->
+                        <a href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/m-sholeh-654152353/?trk=public-profile-join-page" target="_blank"
+                            class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@kuykuykuy524?_t=ZS-8yG02MWekSK&_r=1" target="_blank"
+                            class="flex items-center justify-center transition border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About End -->
+
+    <!-- Skills Section Start -->
+    <section id="skills" class="pb-32 pt-36 bg-slate-100 dark:bg-slate-700">
+        <div class="container">
+            <div class="w-full px-4">
+                <div class="max-w-xl mx-auto mb-16 text-center">
+                    <h4 class="mb-2 text-lg font-semibold text-primary" data-aos="fade-up">Skills</h4>
+                    <h2 class="mb-4 text-3xl font-bold gradient-text sm:text-4xl lg:text-5xl" data-aos="fade-up">Technical Skills</h2>
+                    <p class="font-medium text-md text-secondary md:text-lg" data-aos="fade-up">Berikut adalah keterampilan teknis yang saya kuasai dalam pengembangan web dan aplikasi</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap">
+                <!-- Frontend Skills -->
+                <div class="w-full px-4 mb-10 md:w-1/3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6 rounded-xl glass-effect hover-3d">
+                        <h3 class="mb-4 text-xl font-semibold text-center gradient-text">Frontend</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-html5"></i>
+                                <span class="text-dark dark:text-white">HTML5</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-css3-alt"></i>
+                                <span class="text-dark dark:text-white">CSS3</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-js"></i>
+                                <span class="text-dark dark:text-white">JavaScript</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-react"></i>
+                                <span class="text-dark dark:text-white">React</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-vuejs"></i>
+                                <span class="text-dark dark:text-white">Vue.js</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-wind"></i>
+                                <span class="text-dark dark:text-white">Tailwind CSS</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-bootstrap"></i>
+                                <span class="text-dark dark:text-white">Bootstrap</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="w-full px-4 mb-10 md:w-1/3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 rounded-xl glass-effect hover-3d">
+                        <h3 class="mb-4 text-xl font-semibold text-center gradient-text">Backend</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-php"></i>
+                                <span class="text-dark dark:text-white">PHP</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-node-js"></i>
+                                <span class="text-dark dark:text-white">Node.js</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-database"></i>
+                                <span class="text-dark dark:text-white">MySQL</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-server"></i>
+                                <span class="text-dark dark:text-white">RESTful API</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-laravel"></i>
+                                <span class="text-dark dark:text-white">Laravel</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-fire"></i>
+                                <span class="text-dark dark:text-white">Firebase</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-cogs"></i>
+                                <span class="text-dark dark:text-white">Express.js</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="w-full px-4 mb-10 md:w-1/3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6 rounded-xl glass-effect hover-3d">
+                        <h3 class="mb-4 text-xl font-semibold text-center gradient-text">Tools & Others</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fab fa-git-alt"></i>
+                                <span class="text-dark dark:text-white">Git & GitHub</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-terminal"></i>
+                                <span class="text-dark dark:text-white">Command Line</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-code"></i>
+                                <span class="text-dark dark:text-white">VS Code</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-mobile-alt"></i>
+                                <span class="text-dark dark:text-white">Responsive Design</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-paint-brush"></i>
+                                <span class="text-dark dark:text-white">Figma</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-tasks"></i>
+                                <span class="text-dark dark:text-white">Project Management</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="mr-2 text-primary fas fa-cloud"></i>
+                                <span class="text-dark dark:text-white">Cloud Services</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Skills Section End -->
+
+    <!-- Portfolio Start -->
+    <section id="portfolio" class="pb-16 pt-36 bg-slate-100 dark:bg-slate-800">
+        <div class="container">
+            <div class="w-full px-4">
+                <div class="max-w-xl mx-auto mb-16 text-center">
+                    <h4 class="mb-2 text-lg font-semibold text-primary" data-aos="fade-up">Portfolio</h4>
+                    <h2 class="mb-4 text-3xl font-bold gradient-text sm:text-4xl lg:text-5xl" data-aos="fade-up">Project
+                        Terbaru</h2>
+                    <p class="font-medium text-md text-secondary md:text-lg" data-aos="fade-up">Berikut adalah beberapa proyek terbaru yang telah saya kerjakan</p>
+                </div>
+
+                <!-- Portfolio Filter -->
+                <div class="flex flex-wrap justify-center mb-8" data-aos="fade-up">
+                    <button class="px-4 py-2 m-2 rounded-full filter-btn active" data-filter="all">All</button>
+                    <button class="px-4 py-2 m-2 rounded-full filter-btn" data-filter="web">Web App</button>
+                    <button class="px-4 py-2 m-2 rounded-full filter-btn" data-filter="mobile">Mobile App</button>
+                    <button class="px-4 py-2 m-2 rounded-full filter-btn" data-filter="ui">UI/UX Design</button>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center w-full px-4 xl:w-10/12 xl:mx-auto">
+                <div class="p-4 mb-12 md:w-1/2 portfolio-item" data-category="web">
+                    <div class="overflow-hidden rounded-md shadow-md animated-border" data-aos="zoom-in"
+                    data-aos-duration="1000">
+                        <img src="dist/img/portfolio/1.png" alt="Landing Page" width="w-full" class="img-project">
+                        <div class="p-6 glass-effect">
+                            <h3 class="mb-3 text-xl font-semibold text-dark dark:text-white">Landing Page M. Sholeh</h3>
+                            <p class="text-base font-medium text-secondary">Landing page portfolio yang dibuat dengan HTML, CSS, dan JavaScript.</p>
+                            <div class="flex mt-4 space-x-2">
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">HTML</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">CSS</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 mb-12 md:w-1/2 portfolio-item" data-category="web">
+                    <div class="overflow-hidden rounded-md shadow-md animated-border" data-aos="zoom-in"
+                    data-aos-duration="1000" data-aos-delay="200">
+                        <img src="dist/img/portfolio/2.png" alt="E-Commerce" width="w-full" class="img-project">
+                        <div class="p-6 glass-effect">
+                            <h3 class="mb-3 text-xl font-semibold text-dark dark:text-white">Website E-Commerce</h3>
+                            <p class="text-base font-medium text-secondary">Website e-commerce dengan fitur keranjang belanja dan pembayaran.</p>
+                            <div class="flex mt-4 space-x-2">
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">React</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">Node.js</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 mb-12 md:w-1/2 portfolio-item" data-category="mobile">
+                    <div class="overflow-hidden rounded-md shadow-md animated-border" data-aos="zoom-in"
+                    data-aos-duration="1000">
+                        <img src="dist/img/portfolio/3.png" alt="Mobile App" width="w-full" class="img-project">
+                        <div class="p-6 glass-effect">
+                            <h3 class="mb-3 text-xl font-semibold text-dark dark:text-white">Aplikasi Mobile Edukasi</h3>
+                            <p class="text-base font-medium text-secondary">Aplikasi pembelajaran interaktif untuk siswa sekolah dasar.</p>
+                            <div class="flex mt-4 space-x-2">
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">React Native</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 mb-12 md:w-1/2 portfolio-item" data-category="ui">
+                    <div class="overflow-hidden rounded-md shadow-md animated-border" data-aos="zoom-in"
+                    data-aos-duration="1000" data-aos-delay="200">
+                        <img src="dist/img/portfolio/4.png" alt="UI Design" width="w-full" class="img-project">
+                        <div class="p-6 glass-effect">
+                            <h3 class="mb-3 text-xl font-semibold text-dark dark:text-white">UI/UX Design Dashboard</h3>
+                            <p class="text-base font-medium text-secondary">Desain antarmuka untuk dashboard admin dengan fokus pada pengalaman pengguna.</p>
+                            <div class="flex mt-4 space-x-2">
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">Figma</span>
+                                <span class="px-2 py-1 text-xs text-white rounded-full bg-primary">Adobe XD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio End -->
+
+    <!-- Sertifikat Start -->
+    <section id="sertifikat" class="pb-16 pt-36 bg-slate-200 dark:bg-dark">
+        <div class="container">
+            <div class="w-full px-4">
+                <div class="max-w-xl mx-auto mb-16 text-center">
+                    <h4 class="mb-2 text-lg font-semibold text-primary" data-aos="fade-up">Sertifikat</h4>
+                    <h2 class="mb-4 text-3xl font-bold gradient-text sm:text-4xl lg:text-5xl" data-aos="fade-up">Sertifikasi & Penghargaan</h2>
+                    <p class="font-medium text-md text-secondary md:text-lg" data-aos="fade-up">Berikut adalah sertifikat dan penghargaan yang telah saya peroleh</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap">
+                <div class="w-full px-4 lg:w-1/2 xl:w-1/3" data-aos="zoom-in" data-aos-duration="1000">
+                    <div class="mb-10 overflow-hidden rounded-xl glass-effect hover-3d">
+                        <img src="dist/img/sertifikat/1.jpg" alt="Dicoding" class="img-sertif w-full">
+                        <div class="p-6">
+                            <h3 class="mb-2 text-xl font-semibold text-dark dark:text-white">Belajar Dasar Pemrograman Web</h3>
+                            <p class="text-base font-medium text-secondary">Dicoding Indonesia</p>
+                            <p class="mt-2 text-sm text-secondary">Desember 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full px-4 lg:w-1/2 xl:w-1/3" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="mb-10 overflow-hidden rounded-xl glass-effect hover-3d">
+                        <img src="dist/img/sertifikat/2.jpg" alt="Progate" class="img-sertif w-full">
+                        <div class="p-6">
+                            <h3 class="mb-2 text-xl font-semibold text-dark dark:text-white">JavaScript Fundamental</h3>
+                            <p class="text-base font-medium text-secondary">Progate</p>
+                            <p class="mt-2 text-sm text-secondary">November 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full px-4 lg:w-1/2 xl:w-1/3" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="mb-10 overflow-hidden rounded-xl glass-effect hover-3d">
+                        <img src="dist/img/sertifikat/3.jpg" alt="Coursera" class="img-sertif w-full">
+                        <div class="p-6">
+                            <h3 class="mb-2 text-xl font-semibold text-dark dark:text-white">Responsive Web Design</h3>
+                            <p class="text-base font-medium text-secondary">Coursera</p>
+                            <p class="mt-2 text-sm text-secondary">Oktober 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sertifikat End -->
+
+    <!-- Contact Start -->
+    <section id="contact" class="pb-32 pt-36 dark:bg-slate-800">
+        <div class="container">
+            <div class="w-full px-4">
+                <div class="max-w-xl mx-auto mb-16 text-center">
+                    <h4 class="mb-2 text-lg font-semibold text-primary" data-aos="fade-up">Contact</h4>
+                    <h2 class="mb-4 text-3xl font-bold gradient-text sm:text-4xl lg:text-5xl" data-aos="fade-up">Hubungi Saya</h2>
+                    <p class="font-medium text-md text-secondary md:text-lg" data-aos="fade-up">Silakan hubungi saya untuk kolaborasi atau pertanyaan</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap">
+                <div class="w-full px-4 lg:w-1/2" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="p-6 rounded-xl glass-effect">
+                        <h3 class="mb-4 text-2xl font-semibold gradient-text">Informasi Kontak</h3>
+                        <p class="mb-6 text-base text-secondary">Silakan gunakan informasi kontak di bawah ini atau formulir di samping untuk menghubungi saya.</p>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-10 h-10 mr-3 rounded-full bg-primary text-white">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-dark dark:text-white">Email</h4>
+                                <p class="text-secondary">mohammadsholeh86oke@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-10 h-10 mr-3 rounded-full bg-primary text-white">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-dark dark:text-white">Lokasi</h4>
+                                <p class="text-secondary">Kediri, Jawa Timur, Indonesia</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-10 h-10 mr-3 rounded-full bg-primary text-white">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-dark dark:text-white">Telepon</h4>
+                                <p class="text-secondary">+62 812-1216-7410</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex mt-6 space-x-3">
+                            <a href="https://www.youtube.com/@M.Sholeh-x6x" target="_blank"
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-80 transition-all duration-300">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank"
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-80 transition-all duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://discord.com/channels/@me" target="_blank"
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-80 transition-all duration-300">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@kuykuykuy524?_t=ZS-8yG02MWekSK&_r=1" target="_blank"
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-80 transition-all duration-300">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://github.com/sholehganteng" target="_blank"
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-80 transition-all duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full px-4 lg:w-1/2" data-aos="fade-left" data-aos-duration="1000">
+                    <form id="contact-form" class="p-6 rounded-xl glass-effect">
+                        <div class="relative mb-6">
+                            <label for="name" class="text-base font-bold text-primary">Nama</label>
+                            <div class="relative">
+                                <input type="text" id="name" name="name"
+                                    class="w-full p-3 pl-10 bg-slate-200 text-dark rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-slate-700 dark:text-white"
+                                    required>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <i class="fas fa-user text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative mb-6">
+                            <label for="email" class="text-base font-bold text-primary">Email</label>
+                            <div class="relative">
+                                <input type="email" id="email" name="email"
+                                    class="w-full p-3 pl-10 bg-slate-200 text-dark rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-slate-700 dark:text-white"
+                                    required>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative mb-6">
+                            <label for="message" class="text-base font-bold text-primary">Pesan</label>
+                            <div class="relative">
+                                <textarea id="message" name="message"
+                                    class="w-full h-32 p-3 pl-10 bg-slate-200 text-dark rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-slate-700 dark:text-white"
+                                    required></textarea>
+                                <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
+                                    <i class="fas fa-comment text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <button type="submit"
+                                class="w-full px-8 py-3 text-base font-semibold text-white transition duration-300 ease-in-out rounded-full bg-gradient-to-r from-primary to-blue-500 hover:shadow-lg hover:shadow-primary/50 hover:scale-105">
+                                <i class="fas fa-paper-plane mr-2"></i> Kirim Pesan
+                            </button>
+                        </div>
+                        <div id="success-message" class="hidden mt-4 p-3 bg-green-100 text-green-700 rounded-md">
+                            <i class="fas fa-check-circle mr-2"></i> Pesan berhasil dikirim! Terima kasih telah menghubungi saya.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact End -->
+
+    <!-- Footer Start -->
+    <footer class="pt-24 pb-12 bg-dark">
+        <div class="container">
+            <div class="flex flex-wrap">
+                <div class="w-full px-4 mb-12 font-medium text-slate-300 md:w-1/3">
+                    <h2 class="mb-5 text-4xl font-bold gradient-text">M. SHOLEH</h2>
+                    <h3 class="mb-2 text-2xl font-bold">Hubungi Saya</h3>
+                    <p class="flex items-center mb-2"><i class="fas fa-envelope mr-2 text-primary"></i> mohammadsholeh86oke@gmail.com</p>
+                    <p class="flex items-center mb-2"><i class="fas fa-map-marker-alt mr-2 text-primary"></i> Kediri, Jawa Timur, Indonesia</p>
+                    <p class="flex items-center"><i class="fas fa-phone mr-2 text-primary"></i> +62 812-1216-7410</p>
+                </div>
+                <div class="w-full px-4 mb-12 md:w-1/3">
+                    <h3 class="mb-5 font-semibold text-white">Social Media</h3>
+                    <ul class="text-slate-300">
+                        <li>
+                            <a href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank"
+                                class="inline-block mb-3 text-base hover:text-primary transition-all duration-300 flex items-center"><i class="fab fa-instagram mr-2"></i> Instagram</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/sholehganteng" target="_blank"
+                                class="inline-block mb-3 text-base hover:text-primary transition-all duration-300 flex items-center"><i class="fab fa-github mr-2"></i> GitHub</a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/m-sholeh-654152353/?trk=public-profile-join-page" target="_blank"
+                                class="inline-block mb-3 text-base hover:text-primary transition-all duration-300 flex items-center"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a>
+                        </li>
+                        <li>
+                            <a href="https://www.tiktok.com/@kuykuykuy524?_t=ZS-8yG02MWekSK&_r=1" target="_blank"
+                                class="inline-block mb-3 text-base hover:text-primary transition-all duration-300 flex items-center"><i class="fab fa-tiktok mr-2"></i> TikTok</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full px-4 mb-12 md:w-1/3">
+                    <h3 class="mb-5 font-semibold text-white">Tautan</h3>
+                    <ul class="text-slate-300">
+                        <li>
+                            <a href="#home" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Beranda</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Tentang Saya</a>
+                        </li>
+                        <li>
+                            <a href="#skills" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Keahlian</a>
+                        </li>
+                        <li>
+                            <a href="#portfolio" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="#sertifikat" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Sertifikat</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="inline-block mb-3 text-base hover:text-primary transition-all duration-300">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-full pt-10 border-t border-slate-700">
+                <div class="flex items-center justify-center mb-5">
+                    <!-- Social media icons -->
+                    <a href="https://www.youtube.com/@M.Sholeh-x6x" target="_blank"
+                        class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank"
+                        class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://discord.com/channels/@me" target="_blank"
+                        class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@kuykuykuy524?_t=ZS-8yG02MWekSK&_r=1" target="_blank"
+                        class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://github.com/sholehganteng" target="_blank"
+                        class="flex items-center justify-center mr-3 border rounded-full w-9 h-9 text-slate-300 border-slate-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <p class="text-sm font-medium text-center text-white">© Copyright 2030 M. Sholeh. All rights reserved.</p>
+                <p class="text-sm font-medium text-center text-slate-500">Dibuat dengan <i class="fas fa-heart text-red-500"></i> oleh <a
+                        href="https://www.instagram.com/rembo_jw?igsh=MW9uamc4cm42eHAzZQ==" target="_blank" class="font-bold gradient-text">M. Sholeh</a></p>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top Start -->
+    <a href="#home"
+        class="hidden fixed bottom-4 right-4 z-[9999] justify-center items-center h-14 w-14 rounded-full bg-gradient-to-r from-primary to-blue-500 p-4 hover:animate-pulse shadow-lg shadow-primary/50"
+        id="to-top">
+        <span class="block w-5 h-5 mt-2 rotate-45 border-t-2 border-l-2 border-white"></span>
+    </a>
+    <!-- Back to Top End -->
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="dist/js/script.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+
+        // Initialize Vanilla Tilt for 3D effect
+        VanillaTilt.init(document.querySelectorAll('.hover-3d'), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            'max-glare': 0.3,
+        });
+
+        // Scroll Indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scroll-indicator').style.width = scrollPercent + '%';
+        });
+
+        // Portfolio Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulate form submission
+            setTimeout(() => {
+                successMessage.classList.remove('hidden');
+                contactForm.reset();
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
